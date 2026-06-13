@@ -11,6 +11,23 @@ const typeColors = {
   steel: '#B7B7CE', fairy: '#D685AD',
 };
 
+const typeTranslations = {
+  normal: 'Normal', fire: 'Fuego', water: 'Agua', electric: 'Eléctrico',
+  grass: 'Planta', ice: 'Hielo', fighting: 'Lucha', poison: 'Veneno',
+  ground: 'Tierra', flying: 'Volador', psychic: 'Psíquico', bug: 'Bicho',
+  rock: 'Roca', ghost: 'Fantasma', dragon: 'Dragón', dark: 'Siniestro',
+  steel: 'Acero', fairy: 'Hada',
+};
+
+const statTranslations = {
+  hp: 'Vida',
+  attack: 'Ataque',
+  defense: 'Defensa',
+  'special-attack': 'Atq. Especial',
+  'special-defense': 'Def. Especial',
+  speed: 'Velocidad'
+};
+
 function PokemonDetail() {
   const { name } = useParams();
   const [pokemon, setPokemon] = useState(null);
@@ -75,7 +92,7 @@ function PokemonDetail() {
                     className="type-badge text-uppercase fs-6 px-3 py-2"
                     style={{ backgroundColor: typeColors[t.type.name] || '#777' }}
                   >
-                    {t.type.name}
+                    {typeTranslations[t.type.name] || t.type.name}
                   </span>
                 ))}
               </div>
@@ -84,7 +101,7 @@ function PokemonDetail() {
               {pokemon.stats.map((stat) => (
                 <div key={stat.stat.name} className="mb-3">
                   <div className="d-flex justify-content-between mb-1" style={{ fontSize: '0.85rem', fontWeight: '700', color: '#666' }}>
-                    <span className="text-uppercase">{stat.stat.name.replace('-', ' ')}</span>
+                    <span className="text-uppercase">{statTranslations[stat.stat.name] || stat.stat.name}</span>
                     <span>{stat.base_stat}</span>
                   </div>
                   <ProgressBar 

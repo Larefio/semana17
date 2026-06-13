@@ -25,6 +25,14 @@ function PokemonCard({ pokemon }) {
     steel: '#B7B7CE', fairy: '#D685AD',
   };
 
+  const typeTranslations = {
+    normal: 'Normal', fire: 'Fuego', water: 'Agua', electric: 'Eléctrico',
+    grass: 'Planta', ice: 'Hielo', fighting: 'Lucha', poison: 'Veneno',
+    ground: 'Tierra', flying: 'Volador', psychic: 'Psíquico', bug: 'Bicho',
+    rock: 'Roca', ghost: 'Fantasma', dragon: 'Dragón', dark: 'Siniestro',
+    steel: 'Acero', fairy: 'Hada',
+  };
+
   return (
     <Card 
       className="h-100 pokemon-card position-relative"
@@ -48,7 +56,7 @@ function PokemonCard({ pokemon }) {
               className="type-badge text-uppercase"
               style={{ backgroundColor: typeColors[t.type.name] || '#777' }}
             >
-              {t.type.name}
+              {typeTranslations[t.type.name] || t.type.name}
             </span>
           ))}
         </div>
