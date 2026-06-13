@@ -28,6 +28,24 @@ const statTranslations = {
   speed: 'Velocidad'
 };
 
+const statColors = {
+  hp: '#ef5350',
+  attack: '#ffa726',
+  defense: '#ffee58',
+  'special-attack': '#42a5f5',
+  'special-defense': '#66bb6a',
+  speed: '#ab47bc'
+};
+
+const statLabels = {
+  hp: 'HP',
+  attack: 'ATK',
+  defense: 'DEF',
+  'special-attack': 'SP.ATK',
+  'special-defense': 'SP.DEF',
+  speed: 'SPD'
+};
+
 function PokemonDetail() {
   const { name } = useParams();
   const [pokemon, setPokemon] = useState(null);
@@ -36,7 +54,23 @@ function PokemonDetail() {
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
       .then(res => res.json())
-      .then(data => {
+      .then(async (data) => {
+        const abilitiesWithTranslations = await Promise.all(
+          data.abilities.map(async (a) => {
+            try {
+              const res = await fetch(a.ability.url);
+              const abilityData = await res.json();
+              const spanishName = abilityData.names.find(n => n.language.name === 'es');
+              return {
+                ...a,
+                spanishName: spanishName ? spanishName.name : a.ability.name
+              };
+            } catch (e) {
+              return { ...a, spanishName: a.ability.name };
+            }
+          })
+        );
+        data.abilities = abilitiesWithTranslations;
         setPokemon(data);
         setLoading(false);
       })
@@ -101,22 +135,53 @@ function PokemonDetail() {
               {pokemon.stats.map((stat) => (
                 <div key={stat.stat.name} className="mb-3">
                   <div className="d-flex justify-content-between mb-1" style={{ fontSize: '0.85rem', fontWeight: '700', color: '#666' }}>
-                    <span className="text-uppercase">{statTranslations[stat.stat.name] || stat.stat.name}</span>
+                    <span className="text-uppercase">{statLabels[stat.stat.name] || stat.stat.name}</span>
                     <span>{stat.base_stat}</span>
                   </div>
-                  <ProgressBar 
-                    now={(stat.base_stat / 255) * 100} 
-                    variant={stat.base_stat > 70 ? "success" : stat.base_stat > 40 ? "warning" : "danger"} 
-                    style={{ height: '8px', borderRadius: '4px' }} 
-                  />
+                  <div style={{ backgroundColor: '#e9ecef', height: '5px', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div 
+                      style={{ 
+                        backgroundColor: statColors[stat.stat.name] || '#ef5350', 
+                        height: '100%', 
+                        width: `${Math.min((stat.base_stat / 255) * 100, 100)}%` 
+                      }} 
+                    />
+                  </div>
                 </div>
               ))}
+
+              <h5 className="fw-bold mt-4 mb-3 border-bottom pb-2" style={{ color: '#ef5350' }}>Información General</h5>
+              <Row className="g-3 mb-4">
+                <Col xs={6}>
+                  <div className="text-muted text-uppercase mb-1" style={{ fontSize: '0.75rem', letterSpacing: '1px' }}>Altura</div>
+                  <div className="fw-bold" style={{ color: '#333' }}>{(pokemon.height / 10).toFixed(1)} m</div>
+                </Col>
+                <Col xs={6}>
+                  <div className="text-muted text-uppercase mb-1" style={{ fontSize: '0.75rem', letterSpacing: '1px' }}>Peso</div>
+                  <div className="fw-bold" style={{ color: '#333' }}>{(pokemon.weight / 10).toFixed(1)} kg</div>
+                </Col>
+                <Col xs={6}>
+                  <div className="text-muted text-uppercase mb-1" style={{ fontSize: '0.75rem', letterSpacing: '1px' }}>Exp. Base</div>
+                  <div className="fw-bold" style={{ color: '#333' }}>{pokemon.base_experience}</div>
+                </Col>
+                <Col xs={6}>
+                  <div className="text-muted text-uppercase mb-1" style={{ fontSize: '0.75rem', letterSpacing: '1px' }}>Tipo Principal</div>
+                  <div className="text-uppercase fw-bold" style={{ color: typeColors[pokemon.types[0].type.name] || '#333' }}>
+                    {typeTranslations[pokemon.types[0].type.name] || pokemon.types[0].type.name}
+                  </div>
+                </Col>
+              </Row>
 
               <h5 className="fw-bold mt-4 mb-3 border-bottom pb-2" style={{ color: '#ef5350' }}>Habilidades</h5>
               <div className="d-flex flex-wrap gap-2">
                 {pokemon.abilities.map((ability) => (
-                  <span key={ability.ability.name} className="bg-light border px-3 py-2 rounded-pill text-capitalize text-muted fw-bold" style={{ fontSize: '0.9rem' }}>
-                    {ability.ability.name.replace('-', ' ')}
+                  <span 
+                    key={ability.ability.name} 
+                    className="border px-4 py-2 rounded-pill text-capitalize fw-bold shadow-sm" 
+                    style={{ fontSize: '0.9rem', backgroundColor: '#fff0f0', color: '#ef5350', borderColor: '#ffcdd2' }}
+                  >
+                    {ability.spanishName ? ability.spanishName : ability.ability.name.replace('-', ' ')}
+                    {ability.is_hidden && <span className="ms-1 fw-normal" style={{ fontSize: '0.8rem', opacity: 0.8 }}>(Oculta)</span>}
                   </span>
                 ))}
               </div>
