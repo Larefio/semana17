@@ -17,7 +17,8 @@ function Home() {
 
   return (
     <Container className="my-4">
-      <h2 className="text-center mb-4 fw-bold">Listado de Pokémon</h2>
+      <h2 className="text-center mb-1 fw-bold">Listado de Pokémon</h2>
+      <p className="text-center text-muted mb-4">Primera Generación (Kanto)</p>
       {loading ? (
         <div className="text-center mt-5">
           <Spinner animation="border" variant="danger" />
