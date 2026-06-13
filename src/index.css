@@ -1,7 +1,80 @@
 body {
-  background-color: #f8f9fa;
+  background-color: #121212;
+  color: #ffffff;
   margin: 0;
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.pokemon-card {
+  background-color: #1c1c1c !important;
+  color: white !important;
+  border-radius: 4px;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+}
+
+.pokemon-id {
+  color: #666666;
+  font-size: 0.85rem;
+  font-weight: 600;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.type-badge {
+  background-color: #2b2b2b;
+  color: #888888;
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.search-input {
+  background-color: #1a1a1a !important;
+  border: 1px solid #2a2a2a !important;
+  color: white !important;
+  padding-left: 45px !important;
+  border-radius: 4px;
+}
+
+.search-input::placeholder {
+  color: #666;
+}
+
+.search-input:focus {
+  border-color: #444 !important;
+  box-shadow: none !important;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  z-index: 4;
+}
+
+.navbar-custom {
+  background-color: #121212 !important;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.navbar-brand {
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: #666 !important;
+}
+
+.navbar-brand strong {
+  color: #fff;
 }

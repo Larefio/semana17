@@ -1,19 +1,16 @@
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function Navigation() {
   return (
-    <Navbar bg="danger" variant="dark" expand="lg" className="mb-4 shadow-sm">
+    <Navbar className="navbar-custom py-3" variant="dark">
       <Container>
-        <Navbar.Brand as={Link} to="/" className="fw-bold fs-3">
-          Pokédex
+        <Navbar.Brand as={Link} to="/" className="text-uppercase fw-bold">
+          Pokédex <strong className="ms-2">/ Primera Generación</strong>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+        <div className="text-muted" style={{ fontSize: '0.85rem', letterSpacing: '2px', fontWeight: 'bold' }}>
+          151 / 151
+        </div>
       </Container>
     </Navbar>
   );
