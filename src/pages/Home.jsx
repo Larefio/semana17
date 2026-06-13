@@ -41,12 +41,12 @@ function Home() {
 
       {loading ? (
         <div className="text-center mt-5">
-          <Spinner animation="border" variant="secondary" />
+          <Spinner animation="border" variant="danger" />
         </div>
       ) : (
-        <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-0 border-top border-start border-dark">
+        <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
           {filteredPokemons.map((pokemon) => (
-            <Col key={pokemon.name} className="border-bottom border-end border-dark p-0">
+            <Col key={pokemon.name}>
               <PokemonCard pokemon={pokemon} />
             </Col>
           ))}

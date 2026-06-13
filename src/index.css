@@ -1,6 +1,6 @@
 body {
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #f4f6f8;
+  color: #333333;
   margin: 0;
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -8,73 +8,77 @@ body {
 }
 
 .pokemon-card {
-  background-color: #1c1c1c !important;
-  color: white !important;
-  border-radius: 4px;
-  transition: transform 0.2s ease-in-out;
+  background-color: #ffffff !important;
+  color: #333 !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border: none !important;
 }
 
 .pokemon-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
 }
 
 .pokemon-id {
-  color: #666666;
-  font-size: 0.85rem;
-  font-weight: 600;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  font-weight: 700;
   position: absolute;
   top: 15px;
   left: 15px;
 }
 
 .type-badge {
-  background-color: #2b2b2b;
-  color: #888888;
-  font-size: 0.7rem;
-  padding: 4px 8px;
-  border-radius: 4px;
+  color: #ffffff;
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  border-radius: 20px;
   font-weight: 600;
   letter-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .search-input {
-  background-color: #1a1a1a !important;
-  border: 1px solid #2a2a2a !important;
-  color: white !important;
+  background-color: #ffffff !important;
+  border: 2px solid #e0e0e0 !important;
+  color: #333 !important;
   padding-left: 45px !important;
-  border-radius: 4px;
+  border-radius: 25px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .search-input::placeholder {
-  color: #666;
+  color: #999;
 }
 
 .search-input:focus {
-  border-color: #444 !important;
-  box-shadow: none !important;
+  border-color: #ef5350 !important;
+  box-shadow: 0 0 0 0.25rem rgba(239, 83, 80, 0.25) !important;
 }
 
 .search-icon {
   position: absolute;
-  left: 15px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: #666;
+  color: #ef5350;
   z-index: 4;
 }
 
 .navbar-custom {
-  background-color: #121212 !important;
-  border-bottom: 1px solid #2a2a2a;
+  background-color: #ef5350 !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .navbar-brand {
-  font-size: 1rem;
-  letter-spacing: 2px;
-  color: #666 !important;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: #ffcdd2 !important;
 }
 
 .navbar-brand strong {
-  color: #fff;
+  color: #ffffff;
 }
