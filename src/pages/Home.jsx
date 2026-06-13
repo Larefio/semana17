@@ -7,7 +7,7 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=24')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
       .then((res) => res.json())
       .then((data) => {
         setPokemons(data.results);
